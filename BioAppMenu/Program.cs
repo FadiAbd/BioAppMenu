@@ -15,6 +15,8 @@
                 Console.WriteLine("Type 0 to exit");
                 Console.WriteLine("Type 1 to enter your personal Details");
                 Console.WriteLine("Type 2 to enter a word.");
+                Console.WriteLine("Type 3 to enter a sentense with minimum of 3 words.");
+
                 // Get user input to just enter an integer
                 int userChoice;
                 if (!int.TryParse(Console.ReadLine(), out userChoice))
@@ -35,12 +37,43 @@
                     case 2:
                         PrintAString();
                         break;
+                    case 3:
+                        ManupilateAString();
+                        break;
                     default:
                         Console.WriteLine("Invalid input! Please enter a valid number.");
                         break;
                 }
             }
         }
+
+        private static void ManupilateAString()
+        {
+            Console.WriteLine("Enter a sentence:");
+            string input = Console.ReadLine();
+
+            string[] words = input.Split(new char[] { ' ', ',', '.', '!', '?' },
+                StringSplitOptions.RemoveEmptyEntries);
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                Console.Write($"{i + 1}.{words[i]}");
+                if (i < words.Length - 1)
+                    Console.Write(", ");
+            }
+            Console.WriteLine();
+            if (words.Length >= 3)
+            {
+                Console.WriteLine($"The third word is: {words[2]}");
+            }
+            else
+            {
+                Console.WriteLine("The sentense does not have enough words!");
+            }
+            Console.WriteLine();
+
+        }
+
         // Iteration over user input
         private static void PrintAString()
         {
@@ -107,8 +140,8 @@
             }
 
             // Calculate total cost based on GetPrice method
-            int totalCost = (ungdom * GetPrice("Ungdom")) + 
-                (pensionar * GetPrice("Pensionär")) + 
+            int totalCost = (ungdom * GetPrice("Ungdom")) +
+                (pensionar * GetPrice("Pensionär")) +
                 (standard * GetPrice("Standard"));
 
             // Display results
