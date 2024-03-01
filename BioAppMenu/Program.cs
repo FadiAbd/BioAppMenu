@@ -46,7 +46,8 @@
                 }
             }
         }
-
+        /*A function that split the user input
+         * and then prints the third word.*/
         private static void ManupilateAString()
         {
             Console.WriteLine("Enter a sentence:");
@@ -109,6 +110,8 @@
             int ungdom = 0;
             int pensionar = 0;
             int standard = 0;
+            int barn = 0;
+            int hundraPlusare = 0;
 
             // Collect age information for each person
             for (int i = 0; i < totalPersons; i++)
@@ -136,6 +139,12 @@
                     case "Standard":
                         standard++;
                         break;
+                    case "barn":
+                        barn++;
+                        break;
+                    case "hundraPlusare":
+                        hundraPlusare++;
+                        break;
                 }
             }
 
@@ -149,6 +158,8 @@
             Console.WriteLine($"Ungdom persons: {ungdom}");
             Console.WriteLine($"Pensionär persons: {pensionar}");
             Console.WriteLine($"Standard persons: {standard}");
+            Console.WriteLine($"Ungdom persons: {barn}");
+            Console.WriteLine($"Ungdom persons: {hundraPlusare}");
             Console.WriteLine($"Total price for all: {totalCost} Kr");
         }
 
@@ -163,6 +174,10 @@
                     return 90;
                 case "Standard":
                     return 120;
+                case "barn":
+                    return 0;
+                case "hundraPlusare":
+                    return 0;
                 default:
                     return 0;
             }
@@ -170,10 +185,14 @@
 
         private static string GetPersonType(int age)
         {
-            if (age < 20)
+            if (age < 20 && age >= 5)
                 return "Ungdom";
             else if (age > 64)
                 return "Pensionär";
+            else if (age < 5)
+                return "Gratis för barn";
+            else if (age > 100)
+                return "Gratis för 100+";
             else
                 return "Standard";
         }
