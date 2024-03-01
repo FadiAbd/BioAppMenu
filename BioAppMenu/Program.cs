@@ -92,7 +92,7 @@
         // Method to exit from the menu
         private static void ExitFromMenu()
         {
-            Console.WriteLine("Exiting the menu. Goodbye!");
+            Console.WriteLine("You choose 0 .Exiting the menu. Goodbye!");
         }
 
         /* Get the number of persons  and age entered
@@ -139,28 +139,31 @@
                     case "Standard":
                         standard++;
                         break;
-                    case "barn":
+                    case "Barn":
                         barn++;
                         break;
-                    case "hundraPlusare":
+                    case "HundraPlusare":
                         hundraPlusare++;
                         break;
                 }
             }
 
             // Calculate total cost based on GetPrice method
-            int totalCost = (ungdom * GetPrice("Ungdom")) +
+            int totalCost =
+                (ungdom * GetPrice("Ungdom")) +
                 (pensionar * GetPrice("Pensionär")) +
-                (standard * GetPrice("Standard"));
+                (standard * GetPrice("Standard")) +
+                (barn * GetPrice("Barn"))+
+                (hundraPlusare * GetPrice("Hundraplusare"));
 
             // Display results
-            Console.WriteLine($"Total persons: {totalPersons}");
-            Console.WriteLine($"Ungdom persons: {ungdom}");
-            Console.WriteLine($"Pensionär persons: {pensionar}");
-            Console.WriteLine($"Standard persons: {standard}");
-            Console.WriteLine($"Ungdom persons: {barn}");
-            Console.WriteLine($"Ungdom persons: {hundraPlusare}");
-            Console.WriteLine($"Total price for all: {totalCost} Kr");
+            Console.WriteLine($"Total persons entered: {totalPersons}");
+            //Console.WriteLine($"Ungdom persons: {ungdom}");
+            //Console.WriteLine($"Pensionär persons: {pensionar}");
+            //Console.WriteLine($"Standard persons: {standard}");
+            //Console.WriteLine($"Barn: {barn}");
+            //Console.WriteLine($"Hundraplusare: {hundraPlusare}");
+            Console.WriteLine($"The total cost: {totalCost} Kr");
         }
 
         // Method to get price based on person type
@@ -174,9 +177,9 @@
                     return 90;
                 case "Standard":
                     return 120;
-                case "barn":
+                case "Barn":
                     return 0;
-                case "hundraPlusare":
+                case "HundraPlusare":
                     return 0;
                 default:
                     return 0;
@@ -185,14 +188,14 @@
 
         private static string GetPersonType(int age)
         {
-            if (age < 20 && age >= 5)
+            if (age >= 5 && age <= 20)
                 return "Ungdom";
-            else if (age > 64)
+            else if (age > 64 && age <= 100)
                 return "Pensionär";
             else if (age < 5)
-                return "Gratis för barn";
+                return " Barn";
             else if (age > 100)
-                return "Gratis för 100+";
+                return "Hundraplusare";
             else
                 return "Standard";
         }
