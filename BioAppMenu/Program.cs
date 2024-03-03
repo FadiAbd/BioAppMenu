@@ -1,11 +1,13 @@
-﻿namespace BioAppMenu
+﻿using System.Text.RegularExpressions;
+
+namespace BioAppMenu
 {
     internal class Program
     {
         static void Main(string[] args)
         {
 
-            // Display welcome message
+            // Displaying welcome message
             Console.WriteLine("Welcome to the main menu!");
 
             while (true)
@@ -17,7 +19,7 @@
                 Console.WriteLine("Type 2 to enter a word.");
                 Console.WriteLine("Type 3 to enter a sentense with minimum of 3 words.");
 
-                // Get user input to just enter an integer
+                // Ensuring that User input is an integer
                 int userChoice;
                 if (!int.TryParse(Console.ReadLine(), out userChoice))
                 {
@@ -25,7 +27,7 @@
                     continue; // Restart the loop
                 }
 
-                // Perform action based on user input
+                // Performing action based on user input
                 switch (userChoice)
                 {
                     case 0:
@@ -46,7 +48,7 @@
                 }
             }
         }
-        /*A function that split the user input
+        /*A function that splits the user input
          * and then prints the third word.*/
         private static void ManupilateAString()
         {
@@ -75,29 +77,46 @@
 
         }
 
-        // Iteration over user input
+        // Looping over user input( + Added validation)
         private static void PrintAString()
         {
             Console.WriteLine("word: ");
             string userInput = Console.ReadLine();
 
-            for (int i = 0; i < 10; i++)
+            // Define the pattern to match (for example, only letters )
+            string pattern = @"^[a-zA-Z]+$";
+
+            // Check if the input matches the pattern
+            if (Regex.IsMatch(userInput, pattern))
             {
-                Console.Write($"{userInput} ");
+                Console.WriteLine("Valid string!");
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.Write($"{userInput} ");
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid string. It should contain only letters.");
 
             }
+
+
         }
 
 
-        // Method to exit from the menu
+        // Exiting from the menu
         private static void ExitFromMenu()
         {
             Console.WriteLine("You choose 0 .Exiting the menu. Goodbye!");
         }
 
-        /* Get the number of persons  and age entered
-         * by the user and validate it and calculate 
-            Total cost while calling other methods */
+        /* Getting the number of persons and their age
+         * entered by the user and validate it while
+         * calculating Total cost, we achieve that by 
+         * calling other methods in the class program
+         */
         private static void NumberOfPersons()
         {
             Console.WriteLine("How many persons in total?");
@@ -153,7 +172,7 @@
                 (ungdom * GetPrice("Ungdom")) +
                 (pensionar * GetPrice("Pensionär")) +
                 (standard * GetPrice("Standard")) +
-                (barn * GetPrice("Barn"))+
+                (barn * GetPrice("Barn")) +
                 (hundraPlusare * GetPrice("Hundraplusare"));
 
             // Display results
@@ -166,7 +185,7 @@
             Console.WriteLine($"The total cost: {totalCost} Kr");
         }
 
-        // Method to get price based on person type
+        // Getting  the price based on person type
         private static int GetPrice(string personType)
         {
             switch (personType)
@@ -186,6 +205,7 @@
             }
         }
 
+        //Showing attribut according to your age
         private static string GetPersonType(int age)
         {
             if (age >= 5 && age <= 20)
